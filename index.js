@@ -57,4 +57,13 @@ app.use('/auth', require('./controllers/auth'));
 
 var server = app.listen(process.env.PORT || 3000);
 
+app.get('/waRivers', function(req, res) {
+    var waRiversUrl = 'https://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=wa&parameterCd=00060&siteType=ST&siteStatus=all';
+
+    request(waRiversUrl, function(error, response, body) {
+        var waRiversParsed = JSON.parse(body).results;
+        res.render('/waRivers', { waRiversParsed: waRivers });
+    });
+});
+
 module.exports = server;
