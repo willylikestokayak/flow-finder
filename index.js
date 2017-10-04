@@ -2,6 +2,7 @@ require('dotenv').config();
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
+var request = require('request');
 var app = express();
 
 var session = require('express-session');
@@ -45,6 +46,7 @@ var passport = require('./config/ppConfig');
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Routes
 app.get('/', function(req, res) {
   res.render('index');
 });
@@ -53,17 +55,19 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
-app.use('/auth', require('./controllers/auth'));
-
-var server = app.listen(process.env.PORT || 3000);
-
 app.get('/waRivers', function(req, res) {
     var waRiversUrl = 'https://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=wa&parameterCd=00060&siteType=ST&siteStatus=all';
 
     request(waRiversUrl, function(error, response, body) {
-        var waRiversParsed = JSON.parse(body).results;
-        res.render('/waRivers', { waRiversParsed: waRivers });
+        var waRiversParsed = JSON.parse(body);
+		var waRivers = waRiversParsed.value.timeSeries;
+        
+        res.render('waRivers', { waRivers: waRivers });
     });
 });
+
+app.use('/auth', require('./controllers/auth'));
+
+var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
