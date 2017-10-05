@@ -9,6 +9,8 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
 
+var splitToCreateRiverName = [' NEAR ', ' ABOVE ', ' NR ', ' BELOW ', ' AT ', ' BL ', ' BLW '];
+
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
@@ -61,7 +63,9 @@ app.get('/waRivers', function(req, res) {
     request(waRiversUrl, function(error, response, body) {
         var waRiversParsed = JSON.parse(body);
 		var waRivers = waRiversParsed.value.timeSeries;
-        
+		// loop thru the array and split the titles
+        // var array = waRivers[i].sourceInfo.siteName.split(" AT ");
+
         res.render('waRivers', { waRivers: waRivers });
     });
 });
