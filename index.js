@@ -3,6 +3,10 @@ var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var request = require('request');
+var moment = require('moment');
+var router = express.Router();
+moment().format();
+
 var app = express();
 
 var session = require('express-session');
@@ -68,6 +72,26 @@ app.get('/waRivers', function(req, res) {
 
         res.render('waRivers', { waRivers: waRivers });
     });
+});
+
+router.post("/", isLoggedIn, function(req, res) {
+    db.user.findOne({
+        where: {
+            id: req.user.id
+        }
+    }).then(function(user) {
+        db.user.createRiver({
+                riverName: req.body.riverName,
+                riverFlow: req.body.riverFlow,
+                flowUnit: req.body.flowUnit,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude,
+                timeStamp: req.body.timeStamp
+            })
+            .then(function(river) {
+                console.log("added to db");
+            })
+    })
 });
 
 app.use('/auth', require('./controllers/auth'));
