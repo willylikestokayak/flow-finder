@@ -1,5 +1,4 @@
 <h1>List of Washington Rivers</h1>
-
 <% for(var i = 0; i< waRivers.length; i++){ %>
 	<p>Guage name: <%= waRivers[i].sourceInfo.siteName %></p>
 	<p>Flow: <%= waRivers[i].values[0].value[0].value %> <%= waRivers[i].variable.unit.unitCode %></p>

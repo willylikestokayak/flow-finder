@@ -75,12 +75,15 @@ app.get('/waRivers', function(req, res) {
 });
 
 router.post("/", isLoggedIn, function(req, res) {
-    db.user.findOne({
+    console.log('I am under the router.post function');
+    user.findOne({
         where: {
             id: req.user.id
         }
+        //console.log('I am in the post route' + id: req.user.id);
     }).then(function(user) {
-        db.user.createRiver({
+    	console.log('why you not work. i do not know.');
+        user.createRiver({
                 riverName: req.body.riverName,
                 riverFlow: req.body.riverFlow,
                 flowUnit: req.body.flowUnit,
@@ -89,8 +92,8 @@ router.post("/", isLoggedIn, function(req, res) {
                 timeStamp: req.body.timeStamp
             })
             .then(function(river) {
-                console.log("added to db");
-            })
+                //console.log("added to db");
+        })
     })
 });
 
