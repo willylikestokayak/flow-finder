@@ -76,17 +76,11 @@ app.get('/waRivers', function(req, res) {
 });
 
 app.post("/", isLoggedIn, function(req, res) {
-    console.log('I am under the router.post function');
     db.user.findOne({
         where: {
             id: req.user.id
         },
-        //console.log('I am in the post route' + id: req.user.id);
     }).then(function(user) {
-    	console.log("----------------------------------------------USER: " + user.name);
-    	console.log("FORM DATA:");
-    	console.log(req.body);
-
     	db.river.findOrCreate({
     		where: {
     			riverName: req.body.riverName
@@ -98,10 +92,13 @@ app.post("/", isLoggedIn, function(req, res) {
                 longitude: req.body.longitude,
                 timeStamp: req.body.timeStamp
     		}
+    		//console.log(".............RIVER FLOW" + riverFlow);
     	}).spread(function(river, created) {
-    		console.log("----------------------------------------------RIVER: " + river);
-    		user.addRiver(river).then(function(result){
-    			console.log(result);
+    		console.log("............results " + river.riverName);
+    		console.log('######', user.name);
+    		user.addRiver(river).then(function(waRivers){
+    			console.log("............results " + waRivers);
+    			res.redirect("/favorites");
     		});
 		}).catch(function(err) {
 			console.log(err);
@@ -109,7 +106,16 @@ app.post("/", isLoggedIn, function(req, res) {
 	});
 });
 
+app.get('/', function(req, res) {
+  console.log('I am in the app.get favorites route');
+  db.river.findAll({
+  }).then(function(waRivers) {
+    res.render('/index', { waRivers: waRivers });
+  });
+});
+
 app.use('/auth', require('./controllers/auth'));
+app.use('/favorites', require('./controllers/favorites'));
 
 var server = app.listen(process.env.PORT || 3000);
 

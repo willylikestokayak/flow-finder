@@ -9,10 +9,11 @@
 <div>
  <form method="POST" action="/">
     <input type="hidden" name="riverName" value="<%= waRivers[i].sourceInfo.siteName %>" />
-    <input type="hidden" name="riverflow" value="<%= waRivers[i].values[0].value[0].value %> <%= waRivers[i].variable.unit.unitCode %>" />
+    <input type="hidden" name="riverFlow" value="<%= waRivers[i].values[0].value[0].value %>" />
+    <input type="hidden" name="flowUnit" value="<%= waRivers[i].variable.unit.unitCode %>" />
     <input type="hidden" name="latitude" value="<%= waRivers[i].sourceInfo.geoLocation.geogLocation.latitude %>" />
     <input type="hidden" name="longitude" value="<%= waRivers[i].sourceInfo.geoLocation.geogLocation.longitude %>" />
-    <input type="hidden" name="timestamp" value="<%= waRivers[i].values[0].value[0].dateTime %>" />
+    <input type="hidden" name="timeStamp" value="<%= waRivers[i].values[0].value[0].dateTime %>" />
     <input class="btn btn-primary" type="submit" value="Add to Favorites" />
   </form>
 </div>

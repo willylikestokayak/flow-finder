@@ -1,0 +1,8 @@
+code save
+
+<% waRivers.forEach(function(waRivers) { %>
+   <div class="well">
+     <h2><%= waRivers[i].sourceInfo.siteName %></h2>
+   </div>
+ <% }); %>
+</div>
