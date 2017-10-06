@@ -25,6 +25,14 @@ router.get('/', isLoggedIn, function(req, res){
 		});
 	});	
 
+// router.delete('/:name', function(req, res) {
+//    db.pokemon.destroy({
+//         where: {name: req.params.name}
+//     }).then(function() {
+//         //
+//     })
+//  })
+
 
 
 	//This below get's all my rivers, but like ALLLLL my rivers
