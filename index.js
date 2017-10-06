@@ -4,6 +4,7 @@ var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var request = require('request');
 var moment = require('moment');
+var db = require('./models');
 var router = express.Router();
 moment().format();
 
@@ -74,27 +75,38 @@ app.get('/waRivers', function(req, res) {
     });
 });
 
-router.post("/", isLoggedIn, function(req, res) {
+app.post("/", isLoggedIn, function(req, res) {
     console.log('I am under the router.post function');
-    user.findOne({
+    db.user.findOne({
         where: {
             id: req.user.id
-        }
+        },
         //console.log('I am in the post route' + id: req.user.id);
     }).then(function(user) {
-    	console.log('why you not work. i do not know.');
-        user.createRiver({
-                riverName: req.body.riverName,
-                riverFlow: req.body.riverFlow,
+    	console.log("----------------------------------------------USER: " + user.name);
+    	console.log("FORM DATA:");
+    	console.log(req.body);
+
+    	db.river.findOrCreate({
+    		where: {
+    			riverName: req.body.riverName
+    		},
+    		defaults: {
+    			riverFlow: req.body.riverFlow,
                 flowUnit: req.body.flowUnit,
                 latitude: req.body.latitude,
                 longitude: req.body.longitude,
                 timeStamp: req.body.timeStamp
-            })
-            .then(function(river) {
-                //console.log("added to db");
-        })
-    })
+    		}
+    	}).spread(function(river, created) {
+    		console.log("----------------------------------------------RIVER: " + river);
+    		user.addRiver(river).then(function(result){
+    			console.log(result);
+    		});
+		}).catch(function(err) {
+			console.log(err);
+		});
+	});
 });
 
 app.use('/auth', require('./controllers/auth'));
