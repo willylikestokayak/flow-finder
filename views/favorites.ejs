@@ -1,2 +1,13 @@
 <h2>Favorite Flows</h2>
-<h4>If you are a new user, click the Washington Rivers link to add rivers to your favorites</h4>
+
+<% waRivers.forEach(function(rivers) { %>
+   <!-- console.log(waRivers); -->
+   <div class="well">
+     <h2><%= rivers.riverName %></h2>
+     <p><%= rivers.id %></p>
+     <hr>
+     <hr>
+   </div>
+ <% }); %>
+</div>
+

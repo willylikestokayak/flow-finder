@@ -12,12 +12,26 @@ var router = express.Router();
 
 // var session = require('express-session');
 // var flash = require('connect-flash');
-// var isLoggedIn = require('../middleware/isLoggedIn');
+var isLoggedIn = require('../middleware/isLoggedIn');
 
-router.get('/', function(req, res){
-	res.render("favorites")
+router.get('/', isLoggedIn, function(req, res){
+	db.user.find({
+		where: {
+			id: req.user.id
+		}
+	}).then(function(user){
+		user.getRivers().then(function(waRivers){
+			res.render("favorites", { waRivers: waRivers });
+		});
+	});	
+
+
+
+	//This below get's all my rivers, but like ALLLLL my rivers
+	// db.river.findAll({
+	// }).then(function(waRivers) {
+	// 	res.render("favorites", { waRivers: waRivers });
+	// });	
 });
-
-// var server = app.listen(process.env.PORT || 3000);
 
 module.exports = router;

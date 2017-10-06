@@ -110,7 +110,7 @@ app.get('/', function(req, res) {
   console.log('I am in the app.get favorites route');
   db.river.findAll({
   }).then(function(waRivers) {
-    res.render('/index', { waRivers: waRivers });
+    res.render('/favorites', { waRivers: waRivers });
   });
 });
 
