@@ -10,3 +10,5 @@ $('.delete-btn').click(function(e) {
 		});
 	});
 };
+
+//look up delete tutorial for node.js

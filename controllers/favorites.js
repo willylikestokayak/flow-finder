@@ -28,7 +28,8 @@ router.get('/', isLoggedIn, function(req, res){
 //  });
 
 
-router.delete('/:riverName', function(req, res) {
+router.delete('/:id', function(req, res) {
+  console.log('...........first line of delete route');
   db.river.findById(req.params.id).then(function(river) {
     if (river) {
       river.destroy().then(function() {

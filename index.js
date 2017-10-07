@@ -6,7 +6,6 @@ var request = require('request');
 var moment = require('moment');
 var db = require('./models');
 var router = express.Router();
-moment().format();
 
 var app = express();
 
