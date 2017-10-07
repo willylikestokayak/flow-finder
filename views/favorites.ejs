@@ -3,7 +3,8 @@
 <% waRivers.forEach(function(rivers) { %>
    <div class="well">
      <h2><%= rivers.riverName %></h2>
-     <p><%= rivers.riverFlow %>cfs</p>
+     <p><%= rivers.riverFlow %> cfs</p>
+     <a class="remove" href="/favorites/<%= waRivers.riverName %>" type="submit" class="btn btn-danger remove">Remove from Favorites</a>
      <hr>
      <hr>
    </div>

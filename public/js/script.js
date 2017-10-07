@@ -1,14 +1,12 @@
-$('document').ready(function() {
-	$('.remove').on('click', function(e) {
-		e.preventDefault();
- 		var toRemove = $(this);
- 		var url = toRemove.attr('href');
- 
- 		$.ajax({
- 			method: 'delete',
- 			url: url
- 		}).done(function(data) {
- 			console.log(data);
- 		});
- 		window.location = '/favorites/'
- 	});
+$('.delete-btn').click(function(e) {
+	e.preventDefault();
+	var url = $(this).attr('href');
+
+	$.ajax({
+  	url: url,
+ 	method: 'DELETE'
+	}).done(function() {
+  	window.location.href = '/favorites';
+		});
+	});
+};

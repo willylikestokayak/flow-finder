@@ -16,8 +16,8 @@ var isLoggedIn = require('./middleware/isLoggedIn');
 
 var splitToCreateRiverName = [' NEAR ', ' ABOVE ', ' NR ', ' BELOW ', ' AT ', ' BL ', ' BLW '];
 
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
-
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
@@ -92,22 +92,16 @@ app.post("/", isLoggedIn, function(req, res) {
                 longitude: req.body.longitude,
                 timeStamp: req.body.timeStamp
     		}
-    		//console.log(".............RIVER FLOW" + riverFlow);
     	}).spread(function(river, created) {
-    		console.log("............results " + river.riverName);
-    		console.log('######', user.name);
     		user.addRiver(river).then(function(waRivers){
-    			console.log("............results " + waRivers);
     			res.redirect("/favorites");
     		});
 		}).catch(function(err) {
-			console.log(err);
 		});
 	});
 });
 
 app.get('/', function(req, res) {
-  console.log('I am in the app.get favorites route');
   db.river.findAll({
   }).then(function(waRivers) {
     res.render('/favorites', { waRivers: waRivers });
