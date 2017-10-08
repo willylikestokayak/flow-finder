@@ -1,14 +1,13 @@
-$('.delete-btn').click(function(e) {
-	e.preventDefault();
-	var url = $(this).attr('href');
+// $('.delete-btn').click(function(e) {
+// 	e.preventDefault();
+// 	var url = $(this).attr('href');
 
-	$.ajax({
-  	url: url,
- 	method: 'DELETE'
-	}).done(function() {
-  	window.location.href = '/favorites';
-		});
-	});
-};
+// 	$.ajax({
+//   	url: url,
+//  	method: 'DELETE'
+// 	}).done(function() {
+//   	window.location.href = '/favorites';
+// 		});
+// 	});
+// };
 
-//look up delete tutorial for node.js
