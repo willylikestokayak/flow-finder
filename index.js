@@ -13,8 +13,6 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
 
-var splitToCreateRiverName = [' NEAR ', ' ABOVE ', ' NR ', ' BELOW ', ' AT ', ' BL ', ' BLW '];
-
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(require('morgan')('dev'));
