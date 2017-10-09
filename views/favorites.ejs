@@ -4,27 +4,14 @@
    <div class="well">
      <h2><%= rivers.riverName %></h2>
      <p><%= rivers.riverFlow %> cfs</p>
-     <a href="/favorites/<%= waRivers.river %>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
+     <a href="/favorites/<%= waRivers.river %>" class="btn btn-danger glyphicon glyphicon-trash remove delete-btn" type="submit"></a>
      <hr>
      <hr>
    </div>
  <% }); %>
 </div>
 
-<script>
-$('.delete-btn').click(function(e) {
-	console.log('I am under the delete button...........');
-	e.preventDefault();
-	var url = $(this).attr('href');
 
-	$.ajax({
-  	url: url,
- 	method: 'DELETE'
-	}).done(function() {
-  	window.location.href = '/favorites';
-		});
-});
-</script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

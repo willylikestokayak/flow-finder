@@ -2,6 +2,8 @@ require('dotenv').config();
 var express = require('express');
 var db = require('../models');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var passport = require('../config/ppConfig')
 var isLoggedIn = require('../middleware/isLoggedIn');
 
 router.get('/', isLoggedIn, function(req, res){
@@ -27,17 +29,22 @@ router.get('/', isLoggedIn, function(req, res){
 //     });
 //  });
 
-
-router.delete('/:waRivers', function(req, res) {
+router.delete('/:id', isLoggedIn, function(req, res) {
   console.log('...........first line of delete route');
-  db.river.findById(req.params.id).then(function(river) {
-    if (river) {
-      river.destroy().then(function() {
-        res.send({msg: 'success'});
-      });
-    } else {
-      res.status(404).send({msg: 'error'});
+  console.log("000000000000000000000" + req.params.id);
+  db.river.destroy({
+    where: { 
+      id: req.params.id
     }
+  }).then(function() {
+    // if (river) {
+    //   river.destroy().then(function() {
+    //     res.send({msg: 'success'});
+    //   });
+    // } else {
+    //   res.status(404).send({msg: 'error'});
+    // }
+    res.render('/')
   }).catch(function(err) {
     res.status(500).send({msg: 'error'});
   });
