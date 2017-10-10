@@ -18,32 +18,14 @@ router.get('/', isLoggedIn, function(req, res){
 	});	
 });
 
-// router.delete('/:riverName', function(req, res) {
-//    console.log("...................." + riverName);
-//    db.river.destroy({
-//         where: {
-//         	riverName: req.params.riverName
-//         }
-//     }).then(function() {
-//     	res.redirect('/favorites');
-//     });
-//  });
-
-router.delete('/:id', isLoggedIn, function(req, res) {
+router.delete('/:waRivers', isLoggedIn, function(req, res) {
   console.log('...........first line of delete route');
-  console.log("000000000000000000000" + req.params.id);
+  console.log("000000000000000000000" + req.params.waRivers);
   db.river.destroy({
     where: { 
-      id: req.params.id
+      waRivers: req.params.id
     }
   }).then(function() {
-    // if (river) {
-    //   river.destroy().then(function() {
-    //     res.send({msg: 'success'});
-    //   });
-    // } else {
-    //   res.status(404).send({msg: 'error'});
-    // }
     res.render('/')
   }).catch(function(err) {
     res.status(500).send({msg: 'error'});
