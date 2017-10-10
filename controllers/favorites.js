@@ -18,12 +18,12 @@ router.get('/', isLoggedIn, function(req, res){
 	});	
 });
 
-router.delete('/:waRivers', isLoggedIn, function(req, res) {
+router.delete('/:id', isLoggedIn, function(req, res) {
   console.log('...........first line of delete route');
-  console.log("000000000000000000000" + req.params.waRivers);
+  console.log("000000000000000000000" + req.params.river);
   db.river.destroy({
     where: { 
-      waRivers: req.params.id
+      id: req.params.id
     }
   }).then(function() {
     res.render('/')

@@ -11,17 +11,17 @@
 // 	});
 // };
 
-$('document').ready(function() {
-    $('.remove').on('click', function(e) {
-        e.preventDefault();
-        var toRemove = $(this);
-        var url = toRemove.attr('href');
-        $.ajax({
-            method: 'DELETE',
-            url: url
-        }).done(function(data) {
+// $('document').ready(function() {
+//     $('.remove').on('click', function(e) {
+//         e.preventDefault();
+//         var toRemove = $(this);
+//         var url = toRemove.attr('href');
+//         $.ajax({
+//             method: 'DELETE',
+//             url: url
+//         }).done(function(data) {
         	
-        });
-        window.location = '/favorites'
-    });
-});
+//         });
+//         window.location = '/favorites'
+//     });
+// });

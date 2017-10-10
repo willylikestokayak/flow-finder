@@ -4,7 +4,7 @@
    <div class="well">
      <h2><%= rivers.riverName %></h2>
      <p><%= rivers.riverFlow %> cfs</p>
-     <a href="/favorites/<%= waRivers.river %>" class="btn btn-danger glyphicon glyphicon-trash remove delete-btn" type="submit"></a>
+     <a href="/favorites/<%= rivers.id %>" class="btn btn-danger glyphicon glyphicon-trash remove delete-btn delete-button" type="submit"></a>
      <hr>
      <hr>
    </div>
@@ -12,6 +12,21 @@
 </div>
 
 
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script>
+$('.delete-button').on('click', function(e) {
+  console.log('AJAX delete call');
+    e.preventDefault();
+    var toRemove = $(this);
+    var url = toRemove.attr('href');
+    console.log("----------------------url: " + url);
+    $.ajax({
+        method: 'DELETE',
+        url: url
+    }).done(function(data) {
+      
+    }); 
+    window.location = '/favorites'
+});
+</script>
