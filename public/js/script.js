@@ -17,9 +17,11 @@ $('document').ready(function() {
         var toRemove = $(this);
         var url = toRemove.attr('href');
         $.ajax({
-            method: 'delete',
+            method: 'DELETE',
             url: url
-        }).done(function(data) {});
+        }).done(function(data) {
+        	
+        });
         window.location = '/favorites'
-    })
+    });
 });

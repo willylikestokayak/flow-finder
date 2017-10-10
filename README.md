@@ -56,7 +56,14 @@ A full stack node and express app to allow kayakers a quick look at a list of fa
 ## 10/9/17
 	* DELETE is still not working and driving me insane.
 
+## Route planning
+![alt text](public/img/routes.JPG)
 
+## Model planning
+![alt text](public/img/models.JPG)
+
+## Wireframes
+![alt text](public/img/wireframe.JPG)
 
 
 
